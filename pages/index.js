@@ -7,7 +7,7 @@ import {
   combinedAsArray,
   cxExample,
   keyframesExample,
-} from '../shared/styles'
+} from '../shared/styles';
 
 const Home = () => (
   <>

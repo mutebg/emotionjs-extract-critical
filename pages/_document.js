@@ -1,33 +1,54 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import * as React from 'react'
-import { renderStatic } from '../shared/renderer'
-export default class AppDocument extends Document {
-  static async getInitialProps(ctx) {
-    const initialProps = await Document.getInitialProps(ctx)
-    const { css, ids } = await renderStatic(initialProps.html)
-    return {
-      ...initialProps,
-      styles: (
-        <React.Fragment>
-          {initialProps.styles}
-          <style
-            data-emotion={`css ${ids.join(' ')}`}
-            dangerouslySetInnerHTML={{ __html: css }}
-          />
-        </React.Fragment>
-      ),
-    }
-  }
 
-  render() {
-    return (
-      <Html>
-        <Head />
-        <body>
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    )
-  }
+import { CacheProvider } from '@emotion/react'
+import createEmotionServer from '@emotion/server/create-instance';
+import { myCache, cacheKey } from './create-emotion-cache';
+
+const { extractCritical } = createEmotionServer(myCache);
+
+class MyDocument extends Document {
+    static async getInitialProps(ctx) {
+        // Override the renderPage method so that we can add CacheProvider
+        const renderPage = () =>
+            ctx.renderPage({
+                enhanceApp: (App) => (props) => (
+                    <CacheProvider value={myCache}>
+                        <App {...props} />
+                    </CacheProvider>
+                )
+            });
+
+      
+         // Render current page and extract the critical CSS   
+        const { html } = renderPage();
+        let { css, ids } = extractCritical(html);
+         
+        
+        const initialProps = await Document.getInitialProps({
+            ...ctx,
+            renderPage,
+        });
+        
+
+        return { 
+            ...initialProps,
+            styles: (
+                <style data-emotion={`${cacheKey} ${ids.join(' ')}`}>{css}</style>
+            ) 
+        }
+    }
+
+    render() {
+        return (
+            <Html lang="en-US">
+                <Head />
+                <body>
+                    <Main />
+                    <NextScript />
+                </body>
+            </Html>
+        )
+    }
 }
+
+export default MyDocument
