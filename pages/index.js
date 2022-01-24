@@ -9,10 +9,6 @@ const Dummy = styled.div`
     height: 100px;
 `;
 
-export const config = {
-  unstable_runtimeJS: false
-};
-
 
 const NewskitPage = () => {
 

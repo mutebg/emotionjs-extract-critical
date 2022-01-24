@@ -1,3 +1,4 @@
+// STEP: 2 - Create a cache
 import createCache from '@emotion/cache'
 
 export const cacheKey = 'my-prefix-key';
