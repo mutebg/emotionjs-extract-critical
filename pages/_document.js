@@ -33,8 +33,11 @@ class MyDocument extends Document {
         return { 
             ...initialProps,
             styles: (
-                <style data-emotion={`${cacheKey} ${ids.join(' ')}`}>{css}</style>
-            ) 
+                <style
+                data-emotion={`${cacheKey} ${ids.join(' ')}`}
+                dangerouslySetInnerHTML={{__html: css}}
+                />
+            ),
         }
     }
 
