@@ -3,7 +3,5 @@ module.exports = {
         minimize: false,
         minimizer: false,
     },
-    experimental: {
-        swcMinify: false,
-    }
+    swcMinify: false,
 }

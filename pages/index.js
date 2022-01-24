@@ -1,30 +1,43 @@
+import { useState } from 'react';
 import Head from 'next/head'
-import {
-  basicStyles,
-  otherStyles,
-  someMoreBasicStyles,
-  someCssAsObject,
-  combinedAsArray,
-  cxExample,
-  keyframesExample,
-} from '../shared/styles';
+import {  Button, Headline, Modal, styled } from 'newskit';
 
-const Home = () => (
-  <>
-    <Head>
-      <title>Emotion using the vanilla version supporting SSR</title>
-    </Head>
-    <div>
-      <h1>Emotion Vanilla example</h1>
-      <div className={basicStyles}>Basic styles using emotion</div>
-      <div className={otherStyles}>Some more styles using emotion</div>
-      <div className={someMoreBasicStyles}>Well why not here is some more</div>
-      <div className={someCssAsObject}>Object styles using emotion css</div>
-      <div className={combinedAsArray}>Array of styles using emotion css</div>
-      <div className={cxExample}>cx example from emotion</div>
-      <div className={keyframesExample} />
-    </div>
-  </>
-)
+const Dummy = styled.div`
+    color: red;
+    border: 1px solid violet;
+    width: 100px;
+    height: 100px;
+`;
 
-export default Home
+export const config = {
+  unstable_runtimeJS: false
+};
+
+
+const NewskitPage = () => {
+
+    const [showModal, setShowModal] = useState(false);
+
+    
+    
+    return (
+        <div>
+            
+            <Head>
+                <title>NewsKit Emotion Combination</title>
+            </Head>
+            
+            <div>
+                <Headline>Emotional Newskit</Headline>
+                <Button onClick={() => {
+                    console.log('show modal');
+                    setShowModal(true);
+                }}>Open modal</Button>
+            </div>
+            <Dummy />
+            <Modal open={showModal} onDismiss={()=>setShowModal(false)}>Modal content</Modal>
+        </div>
+    )
+}
+
+export default NewskitPage;
