@@ -22,6 +22,7 @@ class MyDocument extends Document {
 
       
         // STEP: 4 - Render page and extract critical CSS
+        // this is the same as renderToString in no-Next.js applications
         const { html } = renderPage();
         let { css, ids } = extractCritical(html);
          
