@@ -12,12 +12,9 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
 
 
-    // STEP: 3.B.
-    // Client Cache is need in order to match the cache key between server and client
-    // It runs only on the Client since the _document.js is adding it for the server
-    const ClientOnlyCacheProvider = typeof window !== 'undefined' ? (props) => <CacheProvider value={myCache} {...props} /> : React.Fragment;
+    // STEP: 3
     return (
-      <ClientOnlyCacheProvider>
+      <CacheProvider value={myCache} {...pageProps}>
         <ThemeProvider theme={newskitLightTheme}>
           <Global styles={
             css`
@@ -30,7 +27,7 @@ class MyApp extends App {
       
           <Component {...pageProps} />
         </ThemeProvider> 
-      </ClientOnlyCacheProvider>  
+      </CacheProvider>  
     );
   }
 }

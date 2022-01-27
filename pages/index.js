@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Head from 'next/head'
 import {  Button, Headline, Modal, styled } from 'newskit';
 
-const Dummy = styled.div`
+const Foo = styled.div`
     color: red;
     border: 1px solid violet;
     width: 100px;
@@ -30,7 +30,7 @@ const NewskitPage = () => {
                     setShowModal(true);
                 }}>Open modal</Button>
             </div>
-            <Dummy>div</Dummy>
+            <Foo>Bar</Foo>
             <Modal open={showModal} onDismiss={()=>setShowModal(false)}>Modal content</Modal>
         </div>
     )
