@@ -1,4 +1,4 @@
-// STEP: 1 create a custom _document.js and _app.js
+// STEP: 2 create a custom _document.js and _app.js
 import React from "react";
 import App from "next/app";
 import { ThemeProvider, newskitLightTheme, Global, css } from 'newskit';

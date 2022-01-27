@@ -24,13 +24,13 @@ const NewskitPage = () => {
             </Head>
             
             <div>
-                <Headline>Emotional Newskit</Headline>
+                <Headline>Newskit headline component</Headline>
                 <Button onClick={() => {
                     console.log('show modal');
                     setShowModal(true);
                 }}>Open modal</Button>
             </div>
-            <Dummy />
+            <Dummy>div</Dummy>
             <Modal open={showModal} onDismiss={()=>setShowModal(false)}>Modal content</Modal>
         </div>
     )

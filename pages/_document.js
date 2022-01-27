@@ -1,4 +1,4 @@
-// STEP: 1 create a custom _document.js and _app.js
+// STEP: 2 create a custom _document.js and _app.js
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 
 import { CacheProvider } from '@emotion/react'
@@ -8,6 +8,7 @@ import { myCache, cacheKey } from './create-emotion-cache';
 const { extractCritical } = createEmotionServer(myCache);
 
 class MyDocument extends Document {
+
     static async getInitialProps(ctx) {
         // STEP: 3.B Add CacheProvider via overriding the renderPage method
         const renderPage = () =>
@@ -21,8 +22,8 @@ class MyDocument extends Document {
             });
 
       
-        // STEP: 4 - Render page and extract critical CSS
-        // this is the same as renderToString in no-Next.js applications
+        // STEP: 4 - Render page and extract CSS
+        // this is the same as ReactDOMServer.renderToString in no-Next.js applications
         const { html } = renderPage();
         let { css, ids } = extractCritical(html);
          
